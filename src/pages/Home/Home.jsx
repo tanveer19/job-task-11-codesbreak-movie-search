@@ -29,8 +29,8 @@ const Home = () => {
 
   return (
     <div className="text-white  flex flex-col items-center">
-      <div className="text-3xl font-bold mr-10 my-10">Movie Search </div>
-      <div className="">
+      <div className="text-3xl font-bold mr-10 mt-10">Movie Search </div>
+      <div className="my-10">
         <input
           onChange={(e) => setSearchText(e.target.value)}
           className="md:w-96 bg-white text-black p-2 rounded-full"
@@ -38,12 +38,12 @@ const Home = () => {
         />
         <button
           onClick={handleSearch}
-          className="btn bg-sky-800 rounded-full ml-5"
+          className="btn bg-emerald-500 text-white  ml-5"
         >
           Search
         </button>
       </div>
-      <div className="">
+      <div className="flex flex-wrap justify-center gap-7">
         {movies.map((movie, index) => (
           <Movie key={movie.id} movie={movie} index={index}></Movie>
         ))}
