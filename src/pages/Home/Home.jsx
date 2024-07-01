@@ -6,16 +6,6 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=${tmdb_api_key}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       console.log(result);
-  //     });
-  // }, []);
-
   const handleSearch = () => {
     fetch(
       `https://api.themoviedb.org/3/search/movie?query=${searchText}&api_key=${tmdb_api_key}`
@@ -29,7 +19,9 @@ const Home = () => {
 
   return (
     <div className="text-white  flex flex-col items-center">
-      <div className="text-3xl font-bold mr-10 mt-10">Movie Search </div>
+      <a href="/">
+        <div className="text-3xl font-bold mr-10 mt-10">Movie Search </div>
+      </a>
       <div className="my-10">
         <input
           onChange={(e) => setSearchText(e.target.value)}
