@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ViewMovieModal from "../ViewMovieModal/ViewMovieModal";
+import Rating from "../Rating/Rating";
 
 const Movie = ({ movie, index }) => {
   const {
@@ -14,19 +15,43 @@ const Movie = ({ movie, index }) => {
 
   const baseImageUrl = "https://image.tmdb.org/t/p/";
 
-  const posterUrl = baseImageUrl + "w200" + poster_path;
+  const posterUrl = baseImageUrl + "w300" + poster_path;
+
+  const [movieRatings, setMovieRatings] = useState({});
+
+  // load saved ratings
+
+  useEffect(() => {
+    const savedRatings = JSON.parse(localStorage.getItem("movieRatings"));
+    if (savedRatings) {
+      setMovieRatings(savedRatings);
+    }
+  }, []);
+  // update movie ratings
+
+  const handleRatingChange = (movieId, rating) => {
+    const updatedRatings = { ...movieRatings, [movieId]: rating };
+    setMovieRatings(updatedRatings);
+    localStorage.setItem("movieRatings", JSON.stringify(updatedRatings));
+  };
 
   return (
     <div className="">
-      <div className="card glass w-96">
+      <div className="card card-compact bg-base-100 w-96 shadow-xl">
         <figure>
-          <img src={posterUrl} alt="mdb" />
+          <img className="rounded-lg" src={posterUrl} alt="mdb" />
         </figure>
         <div className="card-body h-64 overflow-hidden">
           <h2 className="card-title">{title}</h2>
-          <p className="line-clamp-3">{overview}</p>
-          <div className="card-actions justify-center">
-            <button className="btn bg-emerald-500 text-white">Rating</button>
+          <p className="line-clamp-1">{overview}</p>
+          <div className="card-actions flex items-center justify-center">
+            <div className="p-3 rounded-md bg-emerald-500 text-white">
+              Rating
+            </div>
+            <Rating
+              value={movieRatings[movie.id] || 0}
+              onChange={(rating) => handleRatingChange(movie.id, rating)}
+            ></Rating>
             <button className="btn bg-emerald-500 text-white">Watchlist</button>
 
             <label htmlFor={id} className="btn bg-emerald-500 text-white">

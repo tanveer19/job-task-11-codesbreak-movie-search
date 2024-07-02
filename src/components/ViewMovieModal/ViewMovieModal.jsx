@@ -16,11 +16,12 @@ const ViewMovieModal = ({ movie, posterUrl }) => {
       <div className="modal" role="dialog">
         <div className="modal-box">
           <figure>
-            <img src={posterUrl} alt="mdb" />
+            <img className="rounded-xl" src={posterUrl} alt="mdb" />
           </figure>
-          <h3 className="text-lg font-bold">Title: {title}</h3>
-          <p className="py-4"> Release Date: {release_date}</p>
-          <p className="py-4"> Popularity: {popularity}</p>
+          <h3 className="text-lg font-bold mt-5">Title: {title}</h3>
+          <p className="py-2">ID: {id}</p>
+          <p className="py-2"> Release Date: {release_date}</p>
+          <p className="py-2"> Popularity: {popularity}</p>
           <div className="modal-action">
             <label htmlFor={id} className="btn">
               Close!

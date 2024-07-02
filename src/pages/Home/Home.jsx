@@ -36,8 +36,10 @@ const Home = () => {
         </button>
       </div>
       <div className="flex flex-wrap justify-center gap-7">
-        {movies.map((movie, index) => (
-          <Movie key={movie.id} movie={movie} index={index}></Movie>
+        {movies.map((movie) => (
+          <div key={movie.id} className="flex flex-col items-center">
+            <Movie movie={movie}></Movie>
+          </div>
         ))}
       </div>
     </div>
