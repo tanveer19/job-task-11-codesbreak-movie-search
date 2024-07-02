@@ -5,6 +5,7 @@ const tmdb_api_key = import.meta.env.VITE_apiKey;
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [watchlist, setWatchlist] = useState([]);
 
   const handleSearch = () => {
     fetch(
@@ -16,6 +17,14 @@ const Home = () => {
         setMovies(data.results);
       });
   };
+
+  // Load saved watchlist from local storage
+  useEffect(() => {
+    const savedWatchlist = JSON.parse(localStorage.getItem("watchlist"));
+    if (savedWatchlist) {
+      setWatchlist(savedWatchlist);
+    }
+  }, []);
 
   return (
     <div className="text-white  flex flex-col items-center">
@@ -41,6 +50,18 @@ const Home = () => {
             <Movie movie={movie}></Movie>
           </div>
         ))}
+      </div>
+      <div className="my-10">
+        <h2 className="text-xl font-bold mb-4">Watchlist</h2>
+        {watchlist.length > 0 ? (
+          <ul className="space-y-2">
+            {watchlist.map((movie) => (
+              <li key={movie.id}>{movie.title}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>Your watchlist is empty.</p>
+        )}
       </div>
     </div>
   );

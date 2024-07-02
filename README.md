@@ -11,3 +11,4 @@ Features:
 1. search movies
 2. show details of movies
 3. give rating to movies to save in localstorage
+4. add movies to watchlist to save in localstorage
